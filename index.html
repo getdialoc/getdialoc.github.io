@@ -89,7 +89,9 @@
     .contact .cta { justify-content: center; }
 
     footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--ink-3); font-size: 14px; }
-    .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .legal { line-height: 1.7; }
+    .legal strong { color: var(--ink-2); font-weight: 600; }
+    .foot { align-items: flex-end; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
     @media (max-width: 820px) {
       .grid { grid-template-columns: 1fr; }
@@ -194,7 +196,8 @@
         <h2>Quer testar a Dialoc na sua empresa?</h2>
         <p class="section-lead">Estamos abrindo para as primeiras empresas. Conte um pouco sobre o seu time e a gente responde.</p>
         <div class="cta">
-          <a class="btn primary" href="https://github.com/getdialoc">Fale com a gente</a>
+          <a class="btn primary" href="mailto:felipessmbf@gmail.com?subject=Dialoc">Fale com a gente</a>
+          <a class="btn" href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
         </div>
       </div>
     </section>
@@ -202,8 +205,12 @@
 
   <footer>
     <div class="wrap foot">
+      <div class="legal">
+        <strong>Dialoc</strong> é um produto de FELIPE SERGIO DE SOUZA MENDES BARROSO FILHO DESENVOLVIMENTO DE SOFTWARE LTDA<br>
+        CNPJ 66.388.235/0001-00 · Rua Pais Leme, 215, Conj. 1713, Pinheiros, São Paulo – SP, 05424-150<br>
+        Contato: <a href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
+      </div>
       <span>© 2026 Dialoc</span>
-      <span>Simulação autorizada de engenharia social</span>
     </div>
   </footer>
 </body>
