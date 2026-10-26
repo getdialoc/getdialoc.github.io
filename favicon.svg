@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    App icon: the official mark (180x140) centred in a rounded square. The
+    keyhole takes the background colour — never a third one.
+  -->
+  <rect width="512" height="512" rx="114" fill="#0A0B0C"/>
+  <g transform="translate(112 144) scale(1.6)">
+    <path
+      fill="#F2F2F3"
+      fill-rule="evenodd"
+      d="M27,19 A19,19 0 0 1 46,0 L110,0 A70,70 0 0 1 110,140 L27,140 L0,140 L27,99 Z
+         M97.917,68.994 A16,16 0 1 1 109.083,68.994 L114.5,100 L92.5,100 Z"
+    />
+  </g>
+</svg>
