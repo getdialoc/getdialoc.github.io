@@ -85,19 +85,34 @@
 
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 
-    .report { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px 22px 18px; }
-    .report-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; font-size: 14px; color: var(--ink-2); font-weight: 600; }
-    .report-head .tag { font-size: 12px; color: var(--ink-3); font-weight: 500; background: var(--raised); border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; }
-    .report-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
-    .report-row .who { flex: 1; font-size: 15px; }
-    .report-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
-    .dot.ok { background: var(--steel); } .dot.mid { background: #c9962f; } .dot.bad { background: var(--red); }
-    .score { font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
-    .score.low { color: var(--steel-up); background: var(--steel-tint); }
-    .score.mid { color: #e0b24a; background: #2a2413; }
-    .score.high { color: #ff9ca0; background: #2e1517; }
-    .report-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
-    .report-foot b { color: var(--red); font-weight: 600; }
+    .chat { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 24px 60px -30px rgba(0,0,0,.8); }
+    .chat-top { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); letter-spacing: .04em; text-transform: uppercase; padding-bottom: 6px; }
+    .chat-top .live { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.8s ease-in-out infinite; }
+    .msg { max-width: 82%; padding: 10px 14px; border-radius: 15px; font-size: 15px; line-height: 1.45; }
+    .msg.in { background: var(--raised); align-self: flex-start; border-bottom-left-radius: 5px; }
+    .msg.out { background: var(--ink); color: #111213; align-self: flex-end; border-bottom-right-radius: 5px; }
+    .msg.redacted { align-self: flex-end; background: var(--ink); color: transparent; position: relative; letter-spacing: 3px; user-select: none; }
+    .msg.redacted span { filter: blur(6px); color: #111213; }
+    .msg.redacted::after { content: "capturado"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #111213; opacity: .72; }
+    .typing { align-self: flex-start; display: inline-flex; gap: 4px; background: var(--raised); padding: 13px 15px; border-radius: 15px; border-bottom-left-radius: 5px; }
+    .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); animation: blink 1.3s infinite; }
+    .typing span:nth-child(2) { animation-delay: .2s; } .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+    .verdict { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-3); }
+    .verdict b { color: var(--red); font-weight: 600; }
+    .chat > .msg, .chat > .typing, .chat > .verdict { opacity: 0; }
+    .chat.in > .msg, .chat.in > .typing, .chat.in > .verdict { animation: pop .5s var(--ease) forwards; }
+    .chat.in > *:nth-child(2) { animation-delay: .05s; }
+    .chat.in > *:nth-child(3) { animation-delay: .35s; }
+    .chat.in > *:nth-child(4) { animation-delay: .65s; }
+    .chat.in > *:nth-child(5) { animation-delay: 1s; }
+    .chat.in > *:nth-child(6) { animation-delay: 1.35s; }
+    .chat.in > *:nth-child(7) { animation-delay: 1.65s; }
+    @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .chat > .msg, .chat > .typing, .chat > .verdict { opacity: 1; animation: none; }
+      .typing span, .chat-top .live { animation: none; }
+    }
 
     .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 32px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
     .funnel div { background: var(--surface); padding: 16px 14px; }
@@ -201,15 +216,14 @@
           </div>
           <p class="note reveal d2">Números ilustrativos de um teste.</p>
         </div>
-        <div class="report reveal d1" aria-label="Exemplo de resultado por pessoa">
-          <div class="report-head">
-            <span>Resultado por pessoa</span>
-            <span class="tag">12 de outubro</span>
-          </div>
-          <div class="report-row"><span class="dot ok"></span><span class="who">Equipe de Vendas</span><span class="score low">Baixo</span></div>
-          <div class="report-row"><span class="dot mid"></span><span class="who">Suporte</span><span class="score mid">Médio</span></div>
-          <div class="report-row"><span class="dot bad"></span><span class="who">Financeiro</span><span class="score high">Alto</span></div>
-          <div class="report-foot"><span>Risco médio da empresa</span><b>Alto</b></div>
+        <div class="chat reveal d1" aria-label="Exemplo de uma conversa de teste">
+          <div class="chat-top"><span class="live"></span>Conversa monitorada</div>
+          <div class="msg in">Oi! Tudo certo? Preciso confirmar uma coisa rápida com você.</div>
+          <div class="msg out">opa, pode falar</div>
+          <div class="msg in">Me repassa aquele código que acabou de chegar aí? É pra liberar seu acesso.</div>
+          <div class="msg redacted"><span>••• •••</span></div>
+          <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="verdict"><span>Veredito da Dialoc</span><b>Risco alto · cedeu</b></div>
         </div>
       </div>
     </section>
