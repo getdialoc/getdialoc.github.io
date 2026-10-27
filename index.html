@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="facebook-domain-verification" content="eroq5l3z6bvg3bo7ev0ebx8gf5l8jj" />
-  <title>Dialoc — Simulação de engenharia social no WhatsApp</title>
-  <meta name="description" content="A Dialoc mede o quanto a sua empresa resiste à engenharia social no WhatsApp, com simulações autorizadas conduzidas por IA.">
+  <title>Dialoc — Engenharia social no WhatsApp</title>
+  <meta name="description" content="Campanhas autorizadas de smishing e engenharia social pelo WhatsApp, conduzidas por IA, para medir a superfície de ataque humana da sua empresa.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta property="og:title" content="Dialoc">
-  <meta property="og:description" content="Simulações autorizadas de engenharia social no WhatsApp, conduzidas por IA.">
+  <meta property="og:description" content="Campanhas autorizadas de smishing e engenharia social pelo WhatsApp, conduzidas por IA.">
   <meta property="og:image" content="dialoc-icon-dark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +80,12 @@
     .verdict b { color: #e5484d; font-weight: 600; }
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
 
+    .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 32px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .funnel div { background: var(--surface); padding: 16px 14px; }
+    .funnel .num { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .funnel small { color: var(--ink-3); font-size: 13px; }
+    .funnel .bad .num { color: #e5484d; }
+    .note { color: var(--ink-3); font-size: 13px; margin-top: 10px; }
     ul.checks { list-style: none; padding: 0; margin-top: 36px; display: grid; gap: 18px; }
     ul.checks li { padding-left: 32px; position: relative; color: var(--ink-2); }
     ul.checks li b { color: var(--ink); font-weight: 600; display: block; }
@@ -97,6 +103,7 @@
     @media (max-width: 820px) {
       .grid { grid-template-columns: 1fr; }
       .split { grid-template-columns: 1fr; gap: 8px; }
+      .funnel { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
       .hero { padding: 72px 0 64px; }
       section { padding: 64px 0; }
@@ -119,7 +126,7 @@
         </a>
         <div class="nav-links">
           <a href="#como-funciona">Como funciona</a>
-          <a href="#seguranca">Segurança</a>
+          <a href="#regras">Regras</a>
           <a href="#contato">Contato</a>
         </div>
       </nav>
@@ -128,11 +135,11 @@
 
   <main>
     <div class="wrap hero">
-      <span class="eyebrow">Em acesso antecipado</span>
-      <h1>O golpe chega pelo WhatsApp. <span>Sua equipe está pronta?</span></h1>
-      <p class="lead">A Dialoc mede o quanto a sua empresa resiste à engenharia social, com simulações autorizadas conduzidas por IA, em conversas que soam como as de verdade.</p>
+      <span class="eyebrow">Early access</span>
+      <h1>Engenharia social de verdade. <span>Contra a sua própria empresa.</span></h1>
+      <p class="lead">A Dialoc roda campanhas autorizadas de smishing e engenharia social pelo WhatsApp. Uma IA conduz cada conversa como um atacante faria, e você recebe a superfície de ataque humana da empresa em números.</p>
       <div class="cta">
-        <a class="btn primary" href="#contato">Quero conhecer</a>
+        <a class="btn primary" href="#contato">Pedir acesso</a>
         <a class="btn" href="#como-funciona">Como funciona</a>
       </div>
     </div>
@@ -140,22 +147,22 @@
     <section id="como-funciona">
       <div class="wrap">
         <p class="kicker">Como funciona</p>
-        <h2>Uma campanha, três passos, um retrato honesto do risco.</h2>
+        <h2>Um pentest, só que o alvo são as pessoas.</h2>
         <div class="grid">
           <div class="card">
             <div class="n">01</div>
-            <h3>Você autoriza e escolhe quem participa</h3>
-            <p>A empresa define o escopo da campanha e registra a autorização. Nenhum teste sai sem ela.</p>
+            <h3>Escopo e autorização</h3>
+            <p>A empresa define quem entra na campanha e registra a autorização. Sem ela, nenhuma mensagem sai.</p>
           </div>
           <div class="card">
             <div class="n">02</div>
-            <h3>A IA conversa como um golpista</h3>
-            <p>Cada pessoa recebe uma abordagem no WhatsApp. A IA responde, insiste e se adapta, como num golpe real.</p>
+            <h3>A IA ataca</h3>
+            <p>Cada alvo recebe um pretexto no WhatsApp. A IA responde, insiste, muda de tática e tenta extrair o dado, uma conversa por pessoa.</p>
           </div>
           <div class="card">
             <div class="n">03</div>
-            <h3>Você vê quem resistiu e quem cedeu</h3>
-            <p>Cada conversa é analisada e vira uma nota de risco por pessoa, por área e pela empresa como um todo.</p>
+            <h3>O relatório</h3>
+            <p>Cada conversa é analisada e vira uma nota de risco: quem caiu, com qual pretexto e em que ponto da conversa.</p>
           </div>
         </div>
       </div>
@@ -165,8 +172,15 @@
       <div class="wrap split">
         <div>
           <p class="kicker">O que você mede</p>
-          <h2>Não é um quiz. É a conversa que aconteceria de verdade.</h2>
-          <p class="section-lead">Treinamentos dizem o que as pessoas sabem. A Dialoc mostra o que elas fazem quando alguém insiste: quem ignorou, quem respondeu, quem sustentou a conversa e quem entregou o dado.</p>
+          <h2>Não é um quiz. É o ataque que chegaria amanhã.</h2>
+          <p class="section-lead">Treinamento mede o que as pessoas sabem. A Dialoc mede o que elas fazem quando alguém insiste.</p>
+          <div class="funnel" aria-label="Exemplo de funil de uma campanha">
+            <div><span class="num">120</span><small>contatados</small></div>
+            <div><span class="num">74</span><small>responderam</small></div>
+            <div><span class="num">41</span><small>sustentaram</small></div>
+            <div class="bad"><span class="num">19</span><small>cederam</small></div>
+          </div>
+          <p class="note">Números ilustrativos de uma campanha.</p>
         </div>
         <div class="chat" aria-label="Exemplo de conversa simulada">
           <div class="msg in">Oi, aqui é do financeiro. Preciso confirmar seu acesso ao sistema antes do fechamento.</div>
@@ -178,26 +192,25 @@
       </div>
     </section>
 
-    <section id="seguranca">
+    <section id="regras">
       <div class="wrap">
-        <p class="kicker">Segurança e ética</p>
-        <h2>Feita para proteger as pessoas, não para expô-las.</h2>
+        <p class="kicker">Regras de engajamento</p>
+        <h2>Ofensivo no método. Controlado no escopo.</h2>
         <ul class="checks">
-          <li><b>Só com autorização da empresa</b>Toda campanha exige uma autorização registrada e vigente. Sem ela, nada é enviado.</li>
-          <li><b>Só para a própria equipe</b>A Dialoc testa quem a empresa contratante indicou, dentro do escopo que ela definiu.</li>
-          <li><b>Nada é usado de verdade</b>Senhas, códigos e dados digitados na simulação não são usados para nada além do resultado do teste.</li>
-          <li><b>Resultado para aprender</b>O objetivo é saber onde reforçar o treinamento, não punir quem caiu.</li>
+          <li><b>Só com autorização registrada</b>Cada campanha nasce de uma autorização da empresa contratante, com escopo e prazo.</li>
+          <li><b>Só alvos da própria empresa</b>Ninguém fora da lista que a empresa definiu recebe mensagem.</li>
+          <li><b>O que foi entregue vira evidência, e só</b>Códigos e dados capturados entram no relatório da campanha e não são usados para nada além disso.</li>
         </ul>
       </div>
     </section>
 
     <section id="contato" class="contact">
       <div class="wrap">
-        <p class="kicker">Contato</p>
-        <h2>Quer testar a Dialoc na sua empresa?</h2>
-        <p class="section-lead">Estamos abrindo para as primeiras empresas. Conte um pouco sobre o seu time e a gente responde.</p>
+        <p class="kicker">Early access</p>
+        <h2>Quer saber quem cairia na sua empresa?</h2>
+        <p class="section-lead">Estamos abrindo para os primeiros times de segurança. Conte um pouco sobre a sua empresa e a gente responde.</p>
         <div class="cta">
-          <a class="btn primary" href="mailto:felipessmbf@gmail.com?subject=Dialoc">Fale com a gente</a>
+          <a class="btn primary" href="mailto:felipessmbf@gmail.com?subject=Dialoc%20early%20access">Pedir acesso</a>
           <a class="btn" href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
         </div>
       </div>
