@@ -27,7 +27,9 @@
       --steel: #5980a6;
       --steel-up: #7cbef5;
       --steel-tint: #1e2a34;
+      --red: #e5484d;
       --max: 1080px;
+      --ease: cubic-bezier(.2, .7, .2, 1);
     }
     * { box-sizing: border-box; margin: 0; }
     html { scroll-behavior: smooth; }
@@ -52,6 +54,15 @@
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--steel-up); background: var(--steel-tint); border: 1px solid #2c5d85; padding: 5px 12px; border-radius: 999px; }
     .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--steel-up); animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 50% { opacity: .35; } }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .08s; }
+    .reveal.d2 { transition-delay: .16s; }
+    .reveal.d3 { transition-delay: .24s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    .count { display: inline-flex; align-items: baseline; gap: 6px; }
     h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; margin: 24px 0 22px; max-width: 820px; }
     h1 span { color: var(--ink-3); }
     .lead { font-size: clamp(17px, 2vw, 20px); color: var(--ink-2); max-width: 640px; }
@@ -72,13 +83,21 @@
     .card h3 { font-size: 19px; letter-spacing: -0.01em; margin: 12px 0 8px; }
     .card p { color: var(--ink-2); font-size: 15px; }
 
-    .chat { max-width: 440px; margin-top: 48px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
-    .msg { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.45; }
-    .msg.in { background: #1d1f21; align-self: flex-start; border-bottom-left-radius: 4px; }
-    .msg.out { background: var(--ink); color: #111213; align-self: flex-end; border-bottom-right-radius: 4px; }
-    .verdict { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); }
-    .verdict b { color: #e5484d; font-weight: 600; }
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+    .report { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px 22px 18px; }
+    .report-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; font-size: 14px; color: var(--ink-2); font-weight: 600; }
+    .report-head .tag { font-size: 12px; color: var(--ink-3); font-weight: 500; background: var(--raised); border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; }
+    .report-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .report-row .who { flex: 1; font-size: 15px; }
+    .report-row .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    .dot.ok { background: var(--steel); } .dot.mid { background: #c9962f; } .dot.bad { background: var(--red); }
+    .score { font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+    .score.low { color: var(--steel-up); background: var(--steel-tint); }
+    .score.mid { color: #e0b24a; background: #2a2413; }
+    .score.high { color: #ff9ca0; background: #2e1517; }
+    .report-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
+    .report-foot b { color: var(--red); font-weight: 600; }
 
     .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 32px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
     .funnel div { background: var(--surface); padding: 16px 14px; }
@@ -135,10 +154,10 @@
 
   <main>
     <div class="wrap hero">
-      <span class="eyebrow">Early access</span>
-      <h1>Engenharia social de verdade. <span>Contra a sua própria empresa.</span></h1>
-      <p class="lead">A Dialoc roda campanhas autorizadas de smishing e engenharia social pelo WhatsApp. Uma IA conduz cada conversa como um atacante faria, e você recebe a superfície de ataque humana da empresa em números.</p>
-      <div class="cta">
+      <span class="eyebrow reveal">Early access</span>
+      <h1 class="reveal d1">A superfície de ataque humana da sua empresa, <span>medida.</span></h1>
+      <p class="lead reveal d2">Firewalls você já testa. As pessoas, não. A Dialoc roda testes autorizados de engenharia social pelo WhatsApp e mostra, em números, por onde um golpe entraria.</p>
+      <div class="cta reveal d3">
         <a class="btn primary" href="#contato">Pedir acesso</a>
         <a class="btn" href="#como-funciona">Como funciona</a>
       </div>
@@ -146,23 +165,23 @@
 
     <section id="como-funciona">
       <div class="wrap">
-        <p class="kicker">Como funciona</p>
-        <h2>Um pentest, só que o alvo são as pessoas.</h2>
+        <p class="kicker reveal">Como funciona</p>
+        <h2 class="reveal d1">Um teste de intrusão, com foco nas pessoas.</h2>
         <div class="grid">
-          <div class="card">
+          <div class="card reveal">
             <div class="n">01</div>
             <h3>Escopo e autorização</h3>
-            <p>A empresa define quem entra na campanha e registra a autorização. Sem ela, nenhuma mensagem sai.</p>
+            <p>A empresa define quem entra no teste e registra a autorização. Sem ela, nenhuma mensagem sai.</p>
           </div>
-          <div class="card">
+          <div class="card reveal d1">
             <div class="n">02</div>
-            <h3>A IA ataca</h3>
-            <p>Cada alvo recebe um pretexto no WhatsApp. A IA responde, insiste, muda de tática e tenta extrair o dado, uma conversa por pessoa.</p>
+            <h3>O teste roda sozinho</h3>
+            <p>A IA conduz cada conversa pelo WhatsApp, uma por pessoa, e registra até onde cada uma foi.</p>
           </div>
-          <div class="card">
+          <div class="card reveal d2">
             <div class="n">03</div>
             <h3>O relatório</h3>
-            <p>Cada conversa é analisada e vira uma nota de risco: quem caiu, com qual pretexto e em que ponto da conversa.</p>
+            <p>Cada conversa vira uma nota de risco: quem resistiu, quem cedeu e em que ponto a defesa falhou.</p>
           </div>
         </div>
       </div>
@@ -171,45 +190,48 @@
     <section>
       <div class="wrap split">
         <div>
-          <p class="kicker">O que você mede</p>
-          <h2>Não é um quiz. É o ataque que chegaria amanhã.</h2>
-          <p class="section-lead">Treinamento mede o que as pessoas sabem. A Dialoc mede o que elas fazem quando alguém insiste.</p>
-          <div class="funnel" aria-label="Exemplo de funil de uma campanha">
-            <div><span class="num">120</span><small>contatados</small></div>
-            <div><span class="num">74</span><small>responderam</small></div>
-            <div><span class="num">41</span><small>sustentaram</small></div>
-            <div class="bad"><span class="num">19</span><small>cederam</small></div>
+          <p class="kicker reveal">O que você recebe</p>
+          <h2 class="reveal d1">O risco que hoje você só descobre tarde demais.</h2>
+          <p class="section-lead reveal d2">Treinamento mede o que as pessoas sabem. A Dialoc mede como elas reagem na hora, e transforma isso num retrato do time inteiro.</p>
+          <div class="funnel reveal d2" aria-label="Exemplo de resultado de um teste">
+            <div><span class="num" data-to="120">0</span><small>contatados</small></div>
+            <div><span class="num" data-to="74">0</span><small>responderam</small></div>
+            <div><span class="num" data-to="41">0</span><small>sustentaram</small></div>
+            <div class="bad"><span class="num" data-to="19">0</span><small>cederam</small></div>
           </div>
-          <p class="note">Números ilustrativos de uma campanha.</p>
+          <p class="note reveal d2">Números ilustrativos de um teste.</p>
         </div>
-        <div class="chat" aria-label="Exemplo de conversa simulada">
-          <div class="msg in">Oi, aqui é do financeiro. Preciso confirmar seu acesso ao sistema antes do fechamento.</div>
-          <div class="msg out">Oi! Pode falar.</div>
-          <div class="msg in">Te mandei um código por SMS agora, me passa ele por aqui que eu libero.</div>
-          <div class="msg out">É 482 913</div>
-          <div class="verdict"><span>Análise da conversa</span><b>Risco alto · cedeu</b></div>
+        <div class="report reveal d1" aria-label="Exemplo de resultado por pessoa">
+          <div class="report-head">
+            <span>Resultado por pessoa</span>
+            <span class="tag">12 de outubro</span>
+          </div>
+          <div class="report-row"><span class="dot ok"></span><span class="who">Equipe de Vendas</span><span class="score low">Baixo</span></div>
+          <div class="report-row"><span class="dot mid"></span><span class="who">Suporte</span><span class="score mid">Médio</span></div>
+          <div class="report-row"><span class="dot bad"></span><span class="who">Financeiro</span><span class="score high">Alto</span></div>
+          <div class="report-foot"><span>Risco médio da empresa</span><b>Alto</b></div>
         </div>
       </div>
     </section>
 
     <section id="regras">
       <div class="wrap">
-        <p class="kicker">Regras de engajamento</p>
-        <h2>Ofensivo no método. Controlado no escopo.</h2>
+        <p class="kicker reveal">Regras do teste</p>
+        <h2 class="reveal d1">Realista no método. Controlado no escopo.</h2>
         <ul class="checks">
-          <li><b>Só com autorização registrada</b>Cada campanha nasce de uma autorização da empresa contratante, com escopo e prazo.</li>
-          <li><b>Só alvos da própria empresa</b>Ninguém fora da lista que a empresa definiu recebe mensagem.</li>
-          <li><b>O que foi entregue vira evidência, e só</b>Códigos e dados capturados entram no relatório da campanha e não são usados para nada além disso.</li>
+          <li class="reveal"><b>Só com autorização registrada</b>Cada teste nasce de uma autorização da empresa contratante, com escopo e prazo definidos.</li>
+          <li class="reveal d1"><b>Só o time da própria empresa</b>Ninguém fora da lista que a empresa definiu recebe mensagem.</li>
+          <li class="reveal d2"><b>Os dados viram evidência, e só</b>O que aparece numa conversa entra no relatório do teste e não é usado para mais nada.</li>
         </ul>
       </div>
     </section>
 
     <section id="contato" class="contact">
       <div class="wrap">
-        <p class="kicker">Early access</p>
-        <h2>Quer saber quem cairia na sua empresa?</h2>
-        <p class="section-lead">Estamos abrindo para os primeiros times de segurança. Conte um pouco sobre a sua empresa e a gente responde.</p>
-        <div class="cta">
+        <p class="kicker reveal">Early access</p>
+        <h2 class="reveal d1">Veja por onde um golpe entraria, antes dele.</h2>
+        <p class="section-lead reveal d2">Estamos abrindo para os primeiros times de segurança. Conte um pouco sobre a sua empresa e a gente responde.</p>
+        <div class="cta reveal d2">
           <a class="btn primary" href="mailto:felipessmbf@gmail.com?subject=Dialoc%20early%20access">Pedir acesso</a>
           <a class="btn" href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
         </div>
@@ -227,5 +249,51 @@
       <span>© 2026 Dialoc</span>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reveals = document.querySelectorAll('.reveal');
+      if (prefersReduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.18 });
+        reveals.forEach(function (el) {
+          // Elements already in view on load animate in right away, so the top never flashes empty.
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+            requestAnimationFrame(function () { el.classList.add('in'); });
+          } else {
+            io.observe(el);
+          }
+        });
+      }
+
+      var counted = false;
+      function countUp() {
+        if (counted) return; counted = true;
+        document.querySelectorAll('.num[data-to]').forEach(function (el) {
+          var to = +el.getAttribute('data-to'), start = null, dur = 900;
+          if (prefersReduce) { el.textContent = to; return; }
+          requestAnimationFrame(function step(t) {
+            if (!start) start = t;
+            var p = Math.min((t - start) / dur, 1);
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          });
+        });
+      }
+      var funnel = document.querySelector('.funnel');
+      if (funnel && 'IntersectionObserver' in window) {
+        var fo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { countUp(); fo.disconnect(); } });
+        }, { threshold: 0.4 });
+        fo.observe(funnel);
+      } else { countUp(); }
+    })();
+  </script>
 </body>
 </html>
