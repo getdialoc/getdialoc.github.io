@@ -3,311 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Keep this: it is how Meta verifies ownership of the domain. Do not remove. -->
   <meta name="facebook-domain-verification" content="eroq5l3z6bvg3bo7ev0ebx8gf5l8jj" />
-  <title>Dialoc — Engenharia social no WhatsApp</title>
-  <meta name="description" content="Campanhas autorizadas de smishing e engenharia social pelo WhatsApp, conduzidas por IA, para medir a superfície de ataque humana da sua empresa.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dialoc</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta property="og:title" content="Dialoc">
-  <meta property="og:description" content="Campanhas autorizadas de smishing e engenharia social pelo WhatsApp, conduzidas por IA.">
-  <meta property="og:image" content="dialoc-icon-dark.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --void: #0a0b0c;
-      --surface: #17191a;
-      --line: #232527;
-      --line-2: #2f3234;
-      --ink: #f2f2f3;
-      --ink-2: #9ea3a6;
-      --ink-3: #6e7477;
-      --steel: #5980a6;
-      --steel-up: #7cbef5;
-      --steel-tint: #1e2a34;
-      --red: #e5484d;
-      --max: 1080px;
-      --ease: cubic-bezier(.2, .7, .2, 1);
-    }
-    * { box-sizing: border-box; margin: 0; }
-    html { scroll-behavior: smooth; }
+    :root { color-scheme: dark; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-      background: var(--void);
-      color: var(--ink);
-      font: 16px/1.6 "DM Sans", ui-sans-serif, system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      background: #0a0b0c;
+      color: #f2f2f3;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100svh;
+      padding: 24px;
+      text-align: center;
     }
-    a { color: inherit; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-
-    header { border-bottom: 1px solid var(--line); }
-    nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; text-decoration: none; letter-spacing: -0.01em; }
-    .brand svg { width: 30px; height: 30px; }
-    .nav-links { display: flex; gap: 28px; font-size: 15px; color: var(--ink-2); }
-    .nav-links a { text-decoration: none; }
-    .nav-links a:hover { color: var(--ink); }
-
-    .hero { padding: 104px 0 88px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--steel-up); background: var(--steel-tint); border: 1px solid #2c5d85; padding: 5px 12px; border-radius: 999px; }
-    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--steel-up); animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 50% { opacity: .35; } }
-
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal.d1 { transition-delay: .08s; }
-    .reveal.d2 { transition-delay: .16s; }
-    .reveal.d3 { transition-delay: .24s; }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
-
-    .count { display: inline-flex; align-items: baseline; gap: 6px; }
-    h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; margin: 24px 0 22px; max-width: 820px; }
-    h1 span { color: var(--ink-3); }
-    .lead { font-size: clamp(17px, 2vw, 20px); color: var(--ink-2); max-width: 640px; }
-    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
-    .btn { display: inline-block; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--line-2); }
-    .btn.primary { background: var(--ink); color: #111213; border-color: var(--ink); }
-    .btn.primary:hover { background: #fff; }
-    .btn:not(.primary):hover { border-color: #41464a; }
-
-    section { padding: 88px 0; border-top: 1px solid var(--line); }
-    .kicker { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
-    h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; max-width: 680px; }
-    .section-lead { color: var(--ink-2); margin-top: 14px; max-width: 620px; font-size: 17px; }
-
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
-    .card .n { font-size: 13px; font-weight: 600; color: var(--steel-up); font-variant-numeric: tabular-nums; }
-    .card h3 { font-size: 19px; letter-spacing: -0.01em; margin: 12px 0 8px; }
-    .card p { color: var(--ink-2); font-size: 15px; }
-
-    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-
-    .chat { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 24px 60px -30px rgba(0,0,0,.8); }
-    .chat-top { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); letter-spacing: .04em; text-transform: uppercase; padding-bottom: 6px; }
-    .chat-top .live { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: pulse 1.8s ease-in-out infinite; }
-    .msg { max-width: 82%; padding: 10px 14px; border-radius: 15px; font-size: 15px; line-height: 1.45; }
-    .msg.in { background: var(--raised); align-self: flex-start; border-bottom-left-radius: 5px; }
-    .msg.out { background: var(--ink); color: #111213; align-self: flex-end; border-bottom-right-radius: 5px; }
-    .msg.redacted { align-self: flex-end; background: var(--ink); color: transparent; position: relative; letter-spacing: 3px; user-select: none; }
-    .msg.redacted span { filter: blur(6px); color: #111213; }
-    .msg.redacted::after { content: "capturado"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #111213; opacity: .72; }
-    .typing { align-self: flex-start; display: inline-flex; gap: 4px; background: var(--raised); padding: 13px 15px; border-radius: 15px; border-bottom-left-radius: 5px; }
-    .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); animation: blink 1.3s infinite; }
-    .typing span:nth-child(2) { animation-delay: .2s; } .typing span:nth-child(3) { animation-delay: .4s; }
-    @keyframes blink { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
-    .verdict { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--ink-3); }
-    .verdict b { color: var(--red); font-weight: 600; }
-    .chat > .msg, .chat > .typing, .chat > .verdict { opacity: 0; }
-    .chat.in > .msg, .chat.in > .typing, .chat.in > .verdict { animation: pop .5s var(--ease) forwards; }
-    .chat.in > *:nth-child(2) { animation-delay: .05s; }
-    .chat.in > *:nth-child(3) { animation-delay: .35s; }
-    .chat.in > *:nth-child(4) { animation-delay: .65s; }
-    .chat.in > *:nth-child(5) { animation-delay: 1s; }
-    .chat.in > *:nth-child(6) { animation-delay: 1.35s; }
-    .chat.in > *:nth-child(7) { animation-delay: 1.65s; }
-    @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-    @media (prefers-reduced-motion: reduce) {
-      .chat > .msg, .chat > .typing, .chat > .verdict { opacity: 1; animation: none; }
-      .typing span, .chat-top .live { animation: none; }
+    .mark {
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
     }
-
-    .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 32px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-    .funnel div { background: var(--surface); padding: 16px 14px; }
-    .funnel .num { display: block; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-    .funnel small { color: var(--ink-3); font-size: 13px; }
-    .funnel .bad .num { color: #e5484d; }
-    .note { color: var(--ink-3); font-size: 13px; margin-top: 10px; }
-    ul.checks { list-style: none; padding: 0; margin-top: 36px; display: grid; gap: 18px; }
-    ul.checks li { padding-left: 32px; position: relative; color: var(--ink-2); }
-    ul.checks li b { color: var(--ink); font-weight: 600; display: block; }
-    ul.checks li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--steel); background: var(--steel-tint); }
-
-    .contact { text-align: center; }
-    .contact h2, .contact .section-lead { margin-left: auto; margin-right: auto; }
-    .contact .cta { justify-content: center; }
-
-    footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--ink-3); font-size: 14px; }
-    .legal { line-height: 1.7; }
-    .legal strong { color: var(--ink-2); font-weight: 600; }
-    .foot { align-items: flex-end; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-
-    @media (max-width: 820px) {
-      .grid { grid-template-columns: 1fr; }
-      .split { grid-template-columns: 1fr; gap: 8px; }
-      .funnel { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { display: none; }
-      .hero { padding: 72px 0 64px; }
-      section { padding: 64px 0; }
-      .wrap { padding: 0 16px; }
+    .mark span { color: #7cbef5; }
+    .soon {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      color: #6e7477;
+    }
+    .dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: #5980a6;
+      vertical-align: middle;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <a class="brand" href="#">
-          <svg viewBox="0 0 512 512" aria-hidden="true">
-            <rect width="512" height="512" rx="114" fill="#17191a"/>
-            <g transform="translate(112 144) scale(1.6)">
-              <path fill="#F2F2F3" fill-rule="evenodd" d="M27,19 A19,19 0 0 1 46,0 L110,0 A70,70 0 0 1 110,140 L27,140 L0,140 L27,99 Z M97.917,68.994 A16,16 0 1 1 109.083,68.994 L114.5,100 L92.5,100 Z"/>
-            </g>
-          </svg>
-          Dialoc
-        </a>
-        <div class="nav-links">
-          <a href="#como-funciona">Como funciona</a>
-          <a href="#regras">Regras</a>
-          <a href="#contato">Contato</a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
   <main>
-    <div class="wrap hero">
-      <span class="eyebrow reveal">Early access</span>
-      <h1 class="reveal d1">A superfície de ataque humana da sua empresa, <span>medida.</span></h1>
-      <p class="lead reveal d2">Firewalls você já testa. As pessoas, não. A Dialoc roda testes autorizados de engenharia social pelo WhatsApp e mostra, em números, por onde um golpe entraria.</p>
-      <div class="cta reveal d3">
-        <a class="btn primary" href="#contato">Pedir acesso</a>
-        <a class="btn" href="#como-funciona">Como funciona</a>
-      </div>
-    </div>
-
-    <section id="como-funciona">
-      <div class="wrap">
-        <p class="kicker reveal">Como funciona</p>
-        <h2 class="reveal d1">Um teste de intrusão, com foco nas pessoas.</h2>
-        <div class="grid">
-          <div class="card reveal">
-            <div class="n">01</div>
-            <h3>Escopo e autorização</h3>
-            <p>A empresa define quem entra no teste e registra a autorização. Sem ela, nenhuma mensagem sai.</p>
-          </div>
-          <div class="card reveal d1">
-            <div class="n">02</div>
-            <h3>O teste roda sozinho</h3>
-            <p>A IA conduz cada conversa pelo WhatsApp, uma por pessoa, e registra até onde cada uma foi.</p>
-          </div>
-          <div class="card reveal d2">
-            <div class="n">03</div>
-            <h3>O relatório</h3>
-            <p>Cada conversa vira uma nota de risco: quem resistiu, quem cedeu e em que ponto a defesa falhou.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap split">
-        <div>
-          <p class="kicker reveal">O que você recebe</p>
-          <h2 class="reveal d1">O risco que hoje você só descobre tarde demais.</h2>
-          <p class="section-lead reveal d2">Treinamento mede o que as pessoas sabem. A Dialoc mede como elas reagem na hora, e transforma isso num retrato do time inteiro.</p>
-          <div class="funnel reveal d2" aria-label="Exemplo de resultado de um teste">
-            <div><span class="num" data-to="120">0</span><small>contatados</small></div>
-            <div><span class="num" data-to="74">0</span><small>responderam</small></div>
-            <div><span class="num" data-to="41">0</span><small>sustentaram</small></div>
-            <div class="bad"><span class="num" data-to="19">0</span><small>cederam</small></div>
-          </div>
-          <p class="note reveal d2">Números ilustrativos de um teste.</p>
-        </div>
-        <div class="chat reveal d1" aria-label="Exemplo de uma conversa de teste">
-          <div class="chat-top"><span class="live"></span>Conversa monitorada</div>
-          <div class="msg in">Oi! Tudo certo? Preciso confirmar uma coisa rápida com você.</div>
-          <div class="msg out">opa, pode falar</div>
-          <div class="msg in">Me repassa aquele código que acabou de chegar aí? É pra liberar seu acesso.</div>
-          <div class="msg redacted"><span>••• •••</span></div>
-          <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="verdict"><span>Veredito da Dialoc</span><b>Risco alto · cedeu</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="regras">
-      <div class="wrap">
-        <p class="kicker reveal">Regras do teste</p>
-        <h2 class="reveal d1">Realista no método. Controlado no escopo.</h2>
-        <ul class="checks">
-          <li class="reveal"><b>Só com autorização registrada</b>Cada teste nasce de uma autorização da empresa contratante, com escopo e prazo definidos.</li>
-          <li class="reveal d1"><b>Só o time da própria empresa</b>Ninguém fora da lista que a empresa definiu recebe mensagem.</li>
-          <li class="reveal d2"><b>Os dados viram evidência, e só</b>O que aparece numa conversa entra no relatório do teste e não é usado para mais nada.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contato" class="contact">
-      <div class="wrap">
-        <p class="kicker reveal">Early access</p>
-        <h2 class="reveal d1">Veja por onde um golpe entraria, antes dele.</h2>
-        <p class="section-lead reveal d2">Estamos abrindo para os primeiros times de segurança. Conte um pouco sobre a sua empresa e a gente responde.</p>
-        <div class="cta reveal d2">
-          <a class="btn primary" href="mailto:felipessmbf@gmail.com?subject=Dialoc%20early%20access">Pedir acesso</a>
-          <a class="btn" href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
-        </div>
-      </div>
-    </section>
+    <div class="mark">dialoc<span>.</span></div>
+    <p class="soon"><span class="dot"></span>Early access em breve</p>
   </main>
-
-  <footer>
-    <div class="wrap foot">
-      <div class="legal">
-        <strong>Dialoc</strong> é um produto de FELIPE SERGIO DE SOUZA MENDES BARROSO FILHO DESENVOLVIMENTO DE SOFTWARE LTDA<br>
-        CNPJ 66.388.235/0001-00 · Rua Pais Leme, 215, Conj. 1713, Pinheiros, São Paulo – SP, 05424-150<br>
-        Contato: <a href="mailto:felipessmbf@gmail.com">felipessmbf@gmail.com</a>
-      </div>
-      <span>© 2026 Dialoc</span>
-    </div>
-  </footer>
-
-  <script>
-    (function () {
-      var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var reveals = document.querySelectorAll('.reveal');
-      if (prefersReduce || !('IntersectionObserver' in window)) {
-        reveals.forEach(function (el) { el.classList.add('in'); });
-      } else {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.18 });
-        reveals.forEach(function (el) {
-          // Elements already in view on load animate in right away, so the top never flashes empty.
-          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
-            requestAnimationFrame(function () { el.classList.add('in'); });
-          } else {
-            io.observe(el);
-          }
-        });
-      }
-
-      var counted = false;
-      function countUp() {
-        if (counted) return; counted = true;
-        document.querySelectorAll('.num[data-to]').forEach(function (el) {
-          var to = +el.getAttribute('data-to'), start = null, dur = 900;
-          if (prefersReduce) { el.textContent = to; return; }
-          requestAnimationFrame(function step(t) {
-            if (!start) start = t;
-            var p = Math.min((t - start) / dur, 1);
-            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
-            if (p < 1) requestAnimationFrame(step);
-          });
-        });
-      }
-      var funnel = document.querySelector('.funnel');
-      if (funnel && 'IntersectionObserver' in window) {
-        var fo = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) { countUp(); fo.disconnect(); } });
-        }, { threshold: 0.4 });
-        fo.observe(funnel);
-      } else { countUp(); }
-    })();
-  </script>
 </body>
 </html>
