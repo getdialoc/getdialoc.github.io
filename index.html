@@ -9,14 +9,23 @@
   <title>Dialoc</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600&display=swap" rel="stylesheet">
   <style>
-    :root { color-scheme: dark; }
+    :root {
+      color-scheme: dark;
+      --void: #0a0b0c;
+      --ink: #f2f2f3;
+      --ink-3: #6e7477;
+      --steel: #5980a6;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; }
     body {
-      background: #0a0b0c;
-      color: #f2f2f3;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--void);
+      color: var(--ink);
+      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,31 +33,34 @@
       padding: 24px;
       text-align: center;
     }
-    .mark {
-      font-size: clamp(2.5rem, 10vw, 4.5rem);
+    .wrap { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .mark { height: clamp(54px, 12vw, 74px); width: auto; }
+    .mark path { fill: var(--ink); }
+    .word {
+      font-size: clamp(2rem, 8vw, 3rem);
       font-weight: 600;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.03em;
     }
-    .mark span { color: #7cbef5; }
     .soon {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-      color: #6e7477;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
     }
-    .dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: #5980a6;
-      vertical-align: middle;
-    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--steel); }
   </style>
 </head>
 <body>
-  <main>
-    <div class="mark">dialoc<span>.</span></div>
+  <main class="wrap">
+    <svg class="mark" viewBox="-8 -8 131 156" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dialoc">
+      <path fill-rule="evenodd"
+        d="M27,19 A19,19 0 0 1 46,0 L110,0 A70,70 0 0 1 110,140 L27,140 L0,140 L27,99 Z
+           M97.917,68.994 A16,16 0 1 1 109.083,68.994 L114.5,100 L92.5,100 Z"/>
+    </svg>
+    <div class="word">Dialoc</div>
     <p class="soon"><span class="dot"></span>Early access em breve</p>
   </main>
 </body>
